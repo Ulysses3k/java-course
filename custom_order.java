@@ -3,6 +3,9 @@
 import java.util.Scanner;  // Needed for the Scanner class to read input
 
 public class custom_order {
+	
+	static int totalCost;
+	static String addOnList;
 
     // STEP 1 PRINTING HELLO WORLD TO CONSOLE
     public static void main(String[] args) {
@@ -25,7 +28,7 @@ public class custom_order {
 	  double cost = 15.00; // Cost of cake and cupcakes
 	  final double TAX_RATE = .08;  // Sales tax rate
 	  double tax; // Amount of tax
-	 
+	  	 
     // Introduce shop and prompt user to input first name
       
 	  System.out.println("Welcome to Java's Cake & Cupcake Shoe!");
@@ -68,25 +71,40 @@ public class custom_order {
       
     // STEP 6 PROMPT USER TO CHOOSE FROSTING
 
-	  System.out.println("What type of FROSTING do you want? ");
+	  System.out.println("Do you want FROSTING? We have: ");
 	  System.out.println("Vanilla, Chocolate, Strawberry or Coco");
 	  frostingType = keyboard.nextLine();	 
+	  
+	  if (frostingType != "no"){
+		  addItem(frostingType,2);
+		  addOnList+=", ";
+	  }
       
     //TEST CODE
       
     // STEP 7 PROMPT USER TO CHOOSE FILLING
 
-	  System.out.println("What type of FILLING do you want? ");
+	  System.out.println("Do you want FILLING? We have: ");
 	  System.out.println("Mocha, Mint, Lemon, Caramel or Raspberry");
 	  fillingType = keyboard.nextLine();
+	  
+	  if (fillingType != "no"){
+		  addItem(fillingType,2);
+		  addOnList+=", ";
+	  }
       
     // TEST CODE
       
     // STEP 8 PROMPT USER TO CHOOSE TOPPINGS
 
-      System.out.println("What type of TOPPINGS do you want? ");
+      System.out.println("Do you want TOPPINGS? We have: ");
 	  System.out.println("Sprinkles, Cinammon, Cocoa, Nuts");
 	  toppings = keyboard.nextLine();
+	  
+	  if (toppings != "no"){
+		  addItem(toppings,2);
+		  addOnList+=", ";
+	  }
       
     // TEST CODE
       
@@ -95,20 +113,22 @@ public class custom_order {
 	  System.out.println();
 	  System.out.println(firstName + " , your order is as follows: ");
 	  System.out.println("_________________________________________");
-	  System.out.println("Item Ordered: " + itemOrder);
-	  System.out.println("Frosting: " + frostingType);
-	  System.out.println("Filling: " + fillingType);
-	  System.out.println("Toppings: " + toppings);
+	  System.out.println("Item Ordered: " + itemOrder + ", " + addOnList);
 	  System.out.println("_________________________________________");
     
     // TEST CODE
       
     // STEP 10 DISPLAY COST AND SALES TAX
 	
-	  System.out.printf("The cost of your order is: $%.2f\n", cost);
-	  tax = cost * TAX_RATE;
+	  System.out.printf("The cost of your order is: $%.2f\n", totalCost + cost);
+	  tax = (totalCost + cost) * TAX_RATE;
 	  System.out.printf("The tax is: $%.2f\n", tax);
-	  System.out.printf("The total due is: $%.2f\n",(tax + cost));
-  
-    }   
+	  System.out.printf("The total due is: $%.2f\n",(tax + totalCost + cost));
+	   
+    }
+
+	static void addItem(String item, int cost) {
+		totalCost+=cost;
+		addOnList+=item;
+	}
 }
